@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 config.py
 todo.txt
+data.db
 
 # C extensions
 *.so

@@ -15,7 +15,6 @@ class Modlog(commands.Cog):
     
     #--------Modlog Command--------
     @app_commands.command(name="modlogs", description="Check mod logs for a specific user.")
-    @app_commands.checks.has_permissions(administrator=True)
     async def modlog(self, interaction: discord.Interaction, user: discord.Member, page:int=None):
         if page is None:
             page = 1

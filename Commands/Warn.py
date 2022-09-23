@@ -15,6 +15,7 @@ class Warn(commands.Cog):
     @app_commands.command(name="warn", description="Warn a member in your server")
     @app_commands.checks.has_permissions(administrator=True)
     async def warn(self, interaction: discord.Interaction, user: discord.User, warning:str):
+        warn_channel = interaction.guild.get_channel(1020385590413377547)
         warnDB = await aiosqlite.connect("data.db")
         async with warnDB.execute(f"SELECT case_no FROM Modlogs ORDER BY case_no DESC LIMIT 1") as cursor:
             data = await cursor.fetchone()
@@ -30,6 +31,7 @@ class Warn(commands.Cog):
             await warnDB.execute(f"INSERT INTO Warnings VALUES ({user.id}, 1)")
             await warnDB.commit()
             await warnDB.close()
+            await warn_channel.send(content=f"**{user}** has been warned by {interaction.user.name}. This is their first warning.")
             await interaction.response.send_message(f"✅ **{user}** has been warned for {warning}", ephemeral=True)
             try:
                 await user.send(f"You have been warned in **{interaction.guild.name}** for `{warning}`")
@@ -39,6 +41,7 @@ class Warn(commands.Cog):
         if data[0] > 6:
             await interaction.guild.get_member(user.id).timeout(datetime.timedelta(days=3), reason="Exceeded Warning Limit")
             await interaction.response.send_message(f"⚠ **{user}** has been timed-out for 3 days for having more than 6 warnings", ephemeral=True)
+            await warn_channel.send(content=f"**{user}** has been warned by {interaction.user.name}. And **{user}** has been timed-out for 3 days for having more than 6 warnings.")
             await warnDB.execute(f"DELETE FROM Warnings WHERE user_id = {user.id}")
             await warnDB.commit()
             await warnDB.close()
@@ -48,6 +51,7 @@ class Warn(commands.Cog):
             await warnDB.execute(f"UPDATE Warnings SET warns = warns + 1 WHERE user_id = {user.id}")
             await warnDB.commit()
             await warnDB.close()
+            await warn_channel.send(content=f"**{user}** has been warned by {interaction.user.name}. Warning count {data[0] + 1}/6.")
             await interaction.response.send_message(f"✅ **{user}** has been warned for {warning}", ephemeral=True)
             try:
                 await user.send(f"You have been warned in **{interaction.guild.name}** for `{warning}`")
