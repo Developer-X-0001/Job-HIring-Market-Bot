@@ -13,7 +13,7 @@ class Warn(commands.Cog):
         self.bot = bot
     #--------Warn Command--------
     @app_commands.command(name="warn", description="Warn a member in your server")
-    @app_commands.checks.has_permissions(administrator=True)
+    @app_commands.checks.has_permissions(manage_nicknames=True)
     async def warn(self, interaction: discord.Interaction, user: discord.User, warning:str):
         warn_channel = interaction.guild.get_channel(1020385590413377547)
         warnDB = await aiosqlite.connect("data.db")
@@ -80,7 +80,7 @@ class Warn(commands.Cog):
     
     #--------Pardon Command--------
     @app_commands.command(name="pardon", description="Remove a warning or all warnings from a user")
-    @app_commands.checks.has_permissions(administrator=True)
+    @app_commands.checks.has_permissions(manage_nicknames=True)
     @app_commands.choices(pardon=[
         app_commands.Choice(name="All", value="all"),
         app_commands.Choice(name="1", value="1"),
