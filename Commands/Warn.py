@@ -25,7 +25,6 @@ class Warn(commands.Cog):
             case = int(data[0]) + 1
         async with warnDB.execute(f"SELECT warns FROM Warnings WHERE user_id = {user.id}") as cursor:
             data = await cursor.fetchone()
-            print(data[0])
         if data is None:
             await warnDB.execute(f"INSERT INTO Modlogs VALUES ({case}, 'Warning', {user.id}, {interaction.user.id}, '{warning}')")
             await warnDB.execute(f"INSERT INTO Warnings VALUES ({user.id}, 1)")
@@ -103,7 +102,7 @@ class Warn(commands.Cog):
                 await warnDB.close()
                 await interaction.response.send_message(f"✅ Removed all warnings from **{user}**", ephemeral=True)
         
-        if pardon.value == 1:
+        if pardon.value == "1":
             if data is None:
                 await interaction.response.send_message(f"⚠ **{user}** doesn't have any warnings", ephemeral=True)
             else:
@@ -118,7 +117,7 @@ class Warn(commands.Cog):
                     await warnDB.close()
                     await interaction.response.send_message(f"✅ Removed `1` warning from **{user}'s** warnings", ephemeral=True)
 
-        if pardon.value == 2:
+        if pardon.value == "2":
             if data is None:
                 await interaction.response.send_message(f"⚠ **{user}** doesn't have any warnings", ephemeral=True)
             else:
@@ -133,7 +132,7 @@ class Warn(commands.Cog):
                     await warnDB.close()
                     await interaction.response.send_message(f"✅ Removed `1` warning from **{user}'s** warnings", ephemeral=True)
         
-        if pardon.value == 3:
+        if pardon.value == "3":
             if data is None:
                 await interaction.response.send_message(f"⚠ **{user}** doesn't have any warnings", ephemeral=True)
             else:
@@ -148,7 +147,7 @@ class Warn(commands.Cog):
                     await warnDB.close()
                     await interaction.response.send_message(f"✅ Removed `1` warning from **{user}'s** warnings", ephemeral=True)
         
-        if pardon.value == 4:
+        if pardon.value == "4":
             if data is None:
                 await interaction.response.send_message(f"⚠ **{user}** doesn't have any warnings", ephemeral=True)
             else:
@@ -163,7 +162,7 @@ class Warn(commands.Cog):
                     await warnDB.close()
                     await interaction.response.send_message(f"✅ Removed `1` warning from **{user}'s** warnings", ephemeral=True)
         
-        if pardon.value == 5:
+        if pardon.value == "5":
             if data is None:
                 await interaction.response.send_message(f"⚠ **{user}** doesn't have any warnings", ephemeral=True)
             else:
@@ -178,7 +177,7 @@ class Warn(commands.Cog):
                     await warnDB.close()
                     await interaction.response.send_message(f"✅ Removed `1` warning from **{user}'s** warnings", ephemeral=True)
         
-        if pardon.value == 6:
+        if pardon.value == "6":
             if data is None:
                 await interaction.response.send_message(f"⚠ **{user}** doesn't have any warnings", ephemeral=True)
             else:
