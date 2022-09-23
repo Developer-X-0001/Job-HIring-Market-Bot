@@ -74,6 +74,11 @@ class Rules(commands.Cog):
             app_commands.Choice(name="Staff may moderate at their discretion", value="Staff may moderate at their discretion")
             ]
 
+    #--------Job Rules Command--------
+    @app_commands.command(name="jobrules", description="Shows job rules.")
+    async def jobrules(self, interaction: discord.Interaction):
+        await interaction.response.send_message("Consider reading <#1020303274894692352>, before posting or applying for any job.")
+
 #----------------Cog Setup Function----------------
 async def setup(bot: commands.Bot):
     await bot.add_cog(Rules(bot))

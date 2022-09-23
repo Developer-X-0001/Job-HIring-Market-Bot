@@ -14,7 +14,8 @@ class Bot(commands.Bot):
     def __init__(self):
         super().__init__(
             command_prefix=config.PREFIX,
-            intents=discord.Intents.all()
+            intents=discord.Intents.all(),
+            activity=discord.Activity(type=discord.ActivityType.listening, name="/help")
         )
     
     async def setup_hook(self):
