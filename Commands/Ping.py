@@ -16,7 +16,7 @@ class Ping(commands.Cog):
     #--------Ping Command--------
     @app_commands.command(name="ping", description="Shows current bot latency.")
     async def ping(self, interaction: discord.Interaction):
-        await interaction.response.send_message()
+        await interaction.response.send_message(content=f"Latency: `{round(self.bot.latency * 1000)}`ms")
 
 
 #----------------Cog Setup Function----------------
